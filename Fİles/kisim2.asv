@@ -1,0 +1,45 @@
+%Seçkin Burak Cengiz
+%2.Kýsým matlab kodlarý
+guc=sum(data.^2);
+disp('sinyalin gücü = ')
+disp(guc)
+%Grafik çýktýlarýnýn görünümü için deðiþtirilebilir parametreler
+grafik_ayari = 80000;
+aralik = length(data);
+%Frekansý zamana çevirme ve ölçekleme
+zaman=(1/8000)*grafik_ayari;
+t=linspace(0,zaman,aralik);
+
+x= data;                                    %Orjinal sinyal
+sifir = awgn(data,0,guc);       %SNR=0 WGN uygulanmýþ sinyal
+on = awgn(data,10,guc);        %SNR=10 WGN uygulanmýþ sinyal
+yirmi = awgn(data,20,guc);   %SNR=20 WGN uygulanmýþ sinyal
+%0 db SNR için grafik
+subplot(2,1,1); plot(t,x(1:aralik))
+title('Orjinal sinyal')
+xlabel('Zaman')
+ylabel('Sinyalin Gücü')
+subplot(2,1,2); plot(t,sifir(1:aralik),'--')
+title('SNR=0 dB WGN gürültü uygulanmýþ sinyal')
+xlabel('Zaman')
+ylabel('Sinyalin Gücü')
+%10 db SNR için Grafik
+figure
+subplot(2,1,1); plot(t,x(1:aralik))
+title('Orjinal sinyal')
+xlabel('Zaman')
+ylabel('Sinyalin Gücü')
+subplot(2,1,2); plot(t,on(1:aralik),'--')
+title('SNR=10 dB WGN gürültü uygulanmýþ sinyal')
+xlabel('Zaman')
+ylabel('Sinyalin Gücü')
+%20 db SNR için Grafik
+figure
+subplot(2,1,1); plot(t,x(1:aralik))
+title('Orjinal sinyal')
+xlabel('Zaman')
+ylabel('Sinyalin Gücü')
+subplot(2,1,2); plot(t,yirmi(1:aralik),'--')
+title('SNR=20 dB WGN gürültü uygulanmýþ sinyal')
+xlabel('Zaman')
+ylabel('Sinyalin Gücü')
